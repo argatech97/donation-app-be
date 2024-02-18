@@ -9,3 +9,7 @@ export interface ICreateResponse extends IResponse<{ id: string }> {}
 export interface IListResponse<T> extends IResponse<T> {
   pagination: IPagination;
 }
+
+export interface IDownloadFileResponse {
+  url: string;
+}

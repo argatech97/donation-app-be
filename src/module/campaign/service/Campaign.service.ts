@@ -1,5 +1,5 @@
 import { IPagination } from "@module/common/entity";
-import { ICampaign, ICampaignFilter, IRequestPayload } from "../entity";
+import { ICampaign, ICampaignFilter, ICampaignRequestPayload } from "../entity";
 import { ICampaignRepository } from "../repository";
 import { injectable, inject } from "inversify";
 import { DatabaseIdentifier, IDatabaseClient } from "@module/db";
@@ -17,7 +17,7 @@ export class ICampaignService implements ICampaignRepository {
     "categoryId",
   ];
 
-  create = async (data: IRequestPayload) => {
+  create = async (data: ICampaignRequestPayload) => {
     const res = await this.dbClient.create({
       data,
       tableName: this.tableName,

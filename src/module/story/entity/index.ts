@@ -1,3 +1,3 @@
 export * from "./RequestPayload.entity";
-export * from "./Category.entity";
+export * from "./Story.entity";
 export * from "./Identifier.entity";

@@ -1,4 +1,4 @@
-import { IRequestPayload } from "@module/campaign";
+import { IRequestPayload } from "../entity";
 import { IPagination } from "@module/common";
 import { ICategoryRepository } from "../repository";
 import { inject, injectable } from "inversify";
