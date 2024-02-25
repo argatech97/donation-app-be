@@ -1,7 +1,13 @@
-import { IWebServer } from "@module/server";
 import express, { Application, Request, Response } from "express";
+import { inject, injectable } from "inversify";
 
+import { IWebServer } from "@module/server";
+import { RoutesIdentifier } from "./routes";
+import { IRoutes } from "./common";
+
+@injectable()
 export class Express implements IWebServer {
+  @inject(new RoutesIdentifier().routes) private routes!: IRoutes[];
   private app: Application;
 
   constructor() {
@@ -17,6 +23,9 @@ export class Express implements IWebServer {
   loadConfig = () => {
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: true }));
+    this.routes.forEach((el) => {
+      this.app.use(el.getRoute());
+    });
   };
 
   loadRoutes = () => {
