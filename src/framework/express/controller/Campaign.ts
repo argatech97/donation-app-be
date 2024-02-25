@@ -3,6 +3,7 @@ import { inject, injectable } from "inversify";
 import { CommonIdentifier, IAppErrorResponseHanlder } from "../common";
 import { CampaignIdentifier } from "@module/campaign";
 import { ICampaignUsecase } from "@module/campaign/usecase";
+import { CampaignPayloadDto } from "@module/campaign/dto";
 
 export interface ICampaignController {
   create: (req: Request, res: Response) => Promise<void>;
@@ -16,7 +17,15 @@ export class CampaignController implements ICampaignController {
   @inject(new CampaignIdentifier().usecase) private campaingUC!: ICampaignUsecase;
 
   create = async (req: Request, res: Response) => {
-    await this.campaingUC.create(req.params);
+    try {
+      const payload = await new CampaignPayloadDto(req.params).convertToEntity();
+      const response = await this.campaingUC.create(payload);
+      res.status(201).send(response);
+    } catch (error) {
+      this.errorHandler.execute(res, error);
+    }
   };
-  get = async (req: Request, res: Response) => {};
+  get = async (req: Request, res: Response) => {
+
+  };
 }

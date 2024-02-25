@@ -1,4 +1,4 @@
-import { CategoryCreatePayload, CategoryListPayload } from "@module/category/dto";
+import { CategoryPayloadDto, CategoryListPayload } from "@module/category/dto";
 import { CategoryIdentifier } from "@module/category/entity";
 import { ICategoryUsecase } from "@module/category/usecase";
 import { IAppError } from "@module/common";
@@ -18,11 +18,11 @@ export class CategoryController implements ICategoryController {
   @inject(new CategoryIdentifier().usecase) private uc!: ICategoryUsecase;
   create = async (req: Request, res: Response) => {
     try {
-      const payload = await new CategoryCreatePayload(req.params).convertToEntity();
+      const payload = await new CategoryPayloadDto(req.params).convertToEntity();
       await this.uc.create(payload);
       res.status(201);
     } catch (error) {
-      this.errorHandler.execute(res, error as IAppError);
+      this.errorHandler.execute(res, error);
     }
   };
   get = async (req: Request, res: Response) => {

@@ -1,2 +1,2 @@
-export * from "./CategoryCreatePayload.dto";
+export * from "./CategoryPayload.dto";
 export * from "./CategoryListPayload.dto";
