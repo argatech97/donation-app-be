@@ -24,7 +24,8 @@ export class Express implements IWebServer {
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: true }));
     this.routes.forEach((el) => {
-      this.app.use(el.getRoute());
+      const { prefix, router } = el.getRoute();
+      this.app.use(prefix, router);
     });
   };
 

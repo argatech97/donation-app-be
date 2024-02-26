@@ -1,6 +1,7 @@
 export class ControllerIdentifier {
-  category = "category";
-  campaign = "campaign";
+  category = "category-controller";
+  campaign = "campaign-controller";
+  story = "story-controller";
 }
 
 export const controllerIdentifier = new ControllerIdentifier();
