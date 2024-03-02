@@ -1,3 +1,7 @@
+export type IFilterOperator = "<" | "<=" | "==" | ">" | ">=" | "!=";
+
 export interface IFilter {
-  [key: string]: string;
+  property: string;
+  operator: IFilterOperator;
+  value: unknown;
 }

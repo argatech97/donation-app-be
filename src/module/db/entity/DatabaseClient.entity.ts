@@ -13,7 +13,7 @@ export interface IGetOptions {
   column: string[];
   tableName: string;
   pagination: IPagination;
-  filter?: IFilter;
+  filter?: IFilter[];
 }
 
 export interface IGetByIdOptions {
@@ -24,6 +24,6 @@ export interface IGetByIdOptions {
 
 export interface IDatabaseClient {
   create: <T extends IData>(options: ICreateOptions<T>) => Promise<ICreateResponse>;
-  get: <T>(options: IGetOptions) => Promise<IListResponse<T>>;
+  get: <T>(options: IGetOptions) => Promise<IListResponse<T[]>>;
   getById: <T>(options: IGetByIdOptions) => Promise<IResponse<T>>;
 }
