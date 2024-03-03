@@ -4,5 +4,5 @@ import { ICampaign, ICampaignFilter, ICampaignRequestPayload } from "../entity";
 export interface ICampaignRepository {
   create: (data: ICampaignRequestPayload) => Promise<ICreateResponse>;
   getDetail: (id: string) => Promise<ICampaign>;
-  get: (pagination: IPagination, filter?: ICampaignFilter) => Promise<IListResponse<ICampaign>>;
+  get: (pagination: IPagination, filter?: ICampaignFilter) => Promise<IListResponse<ICampaign[]>>;
 }

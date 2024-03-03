@@ -3,5 +3,5 @@ import { ICategory, IRequestPayload } from "../entity";
 
 export interface ICategoryRepository {
   create: (data: IRequestPayload) => Promise<void>;
-  getList: (pagination: IPagination) => Promise<IListResponse<ICategory>>;
+  getList: (pagination: IPagination) => Promise<IListResponse<ICategory[]>>;
 }

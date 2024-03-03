@@ -1,5 +1,12 @@
-import { ICreateResponse, IFilter, IListResponse, IResponse } from "@module/common";
-import { ICreateOptions, IData, IDatabaseClient, IGetByIdOptions, IGetOptions } from "@module/db";
+import { ICreateResponse, IListResponse, IResponse } from "@module/common";
+import {
+  ICreateOptions,
+  IData,
+  IDatabaseClient,
+  IFilter,
+  IGetByIdOptions,
+  IGetOptions,
+} from "@module/db";
 import { FirebaseApp, FirebaseOptions, initializeApp } from "firebase/app";
 import {
   Firestore,
@@ -14,6 +21,8 @@ import {
   limit,
   where,
   getCountFromServer,
+  startAfter,
+  endBefore,
 } from "firebase/firestore";
 import { inject, injectable } from "inversify";
 import { firebaseIdentifier } from "./Identifier";
@@ -48,10 +57,16 @@ export class FirestoreClient implements IDatabaseClient {
       const ref = collection(this.firestore, options.tableName);
       let q = query(ref);
       if (options.pagination) {
-        const { limit: l, orderBy: ob, isDesc } = options.pagination;
+        const { limit: l, orderBy: ob, isDesc, isNext } = options.pagination;
         q = query(q, limit(l));
         if (ob) {
           q = query(q, orderBy(ob, isDesc ? "desc" : "asc"));
+        }
+        const { offsetByRecordId } = options;
+        if (isNext && offsetByRecordId) {
+          q = query(q, startAfter(offsetByRecordId));
+        } else if (offsetByRecordId) {
+          q = query(q, endBefore(offsetByRecordId));
         }
       }
       const snapshot = await getDocs(q);

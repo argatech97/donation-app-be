@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-export interface IRoutes {
+export interface IRoute {
   configureRoute: () => void;
   getRoute: () => { prefix: string; router: Router };
 }

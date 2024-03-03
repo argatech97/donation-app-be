@@ -1,5 +1,6 @@
-import { IFilter, ICreateResponse, IPagination, IResponse, IListResponse } from "@module/common";
+import { ICreateResponse, IPagination, IResponse, IListResponse } from "@module/common";
 
+import { IFilter } from "./Filter.entity";
 export interface IData {
   [key: string]: string | number | boolean;
 }

@@ -1,10 +1,10 @@
 import express, { Router } from "express";
 import { inject, injectable } from "inversify";
 import { ICategoryController, controllerIdentifier } from "../controller";
-import { IRoutes } from "../common";
+import { IRoute } from "../common";
 
 @injectable()
-export class CategoryRoutes implements IRoutes {
+export class CategoryRoutes implements IRoute {
   private router: Router;
   @inject(controllerIdentifier.category) private controller!: ICategoryController;
   constructor() {

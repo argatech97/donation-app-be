@@ -5,7 +5,7 @@ import { ICategoryRepository } from "../repository";
 
 export interface ICategoryUsecase {
   create: (data: IRequestPayload) => Promise<void>;
-  get: (pagination: IPagination) => Promise<IListResponse<ICategory>>;
+  get: (pagination: IPagination) => Promise<IListResponse<ICategory[]>>;
 }
 
 @injectable()

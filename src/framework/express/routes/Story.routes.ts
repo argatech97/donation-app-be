@@ -1,10 +1,10 @@
 import express, { Router } from "express";
-import { IRoutes } from "../common";
+import { IRoute } from "../common";
 import { inject, injectable } from "inversify";
 import { IStoryController, controllerIdentifier } from "../controller";
 
 @injectable()
-export class StoryRoute implements IRoutes {
+export class StoryRoute implements IRoute {
   @inject(controllerIdentifier.story) private controller!: IStoryController;
   private router!: Router;
 

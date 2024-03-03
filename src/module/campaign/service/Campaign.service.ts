@@ -2,11 +2,11 @@ import { IPagination } from "@module/common/entity";
 import { ICampaign, ICampaignFilter, ICampaignRequestPayload } from "../entity";
 import { ICampaignRepository } from "../repository";
 import { injectable, inject } from "inversify";
-import { DatabaseIdentifier, IDatabaseClient } from "@module/db";
+import { EqualToFilter, IDatabaseClient, databaseIdentifier } from "@module/db";
 
 @injectable()
-export class ICampaignService implements ICampaignRepository {
-  @inject(new DatabaseIdentifier().databaseClient) private dbClient!: IDatabaseClient;
+export class CampaignService implements ICampaignRepository {
+  @inject(databaseIdentifier.databaseClient) private dbClient!: IDatabaseClient;
   private tableName = "campaign";
   private columns: string[] = [
     "title",
@@ -30,7 +30,9 @@ export class ICampaignService implements ICampaignRepository {
       column: this.columns,
       tableName: this.tableName,
       pagination,
-      filter,
+      filter: filter
+        ? Object.keys(filter).map((el) => new EqualToFilter(el, filter[el]))
+        : undefined,
     });
 
     return res;

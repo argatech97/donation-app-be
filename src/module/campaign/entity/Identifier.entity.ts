@@ -3,3 +3,5 @@ export class CampaignIdentifier {
   usecase = "campaign-usecase";
   createCampaign = "create-campaing";
 }
+
+export const campaignIdentifier = new CampaignIdentifier();

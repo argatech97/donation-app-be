@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { inject, injectable } from "inversify";
-import { CommonIdentifier, IAppErrorResponseHanlder } from "../common";
-import { CampaignIdentifier } from "@module/campaign";
+import { commonIdentifier, IAppErrorResponseHanlder } from "../common";
+import { campaignIdentifier } from "@module/campaign";
 import { ICampaignUsecase } from "@module/campaign/usecase";
 import { CampaignListPayloadDto, CampaignPayloadDto } from "@module/campaign/dto";
 
@@ -12,9 +12,9 @@ export interface ICampaignController {
 
 @injectable()
 export class CampaignController implements ICampaignController {
-  @inject(new CommonIdentifier().appErrorResponseHandler)
+  @inject(commonIdentifier.appErrorResponseHandler)
   private errorHandler!: IAppErrorResponseHanlder;
-  @inject(new CampaignIdentifier().usecase) private campaignUC!: ICampaignUsecase;
+  @inject(campaignIdentifier.usecase) private campaignUC!: ICampaignUsecase;
 
   create = async (req: Request, res: Response) => {
     try {

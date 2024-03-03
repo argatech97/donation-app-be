@@ -1,13 +1,13 @@
 import express, { Router } from "express";
-import { IRoutes } from "../common";
+import { IRoute } from "../common";
 import { inject, injectable } from "inversify";
-import { ControllerIdentifier } from "../controller";
-import { ICampaignController } from "../controller/Campaign";
+import { controllerIdentifier } from "../controller";
+import { ICampaignController } from "../controller/Campaign.controller";
 
 @injectable()
-export class CampaignRoute implements IRoutes {
+export class CampaignRoute implements IRoute {
   private router!: Router;
-  @inject(new ControllerIdentifier().campaign) private controller!: ICampaignController;
+  @inject(controllerIdentifier.campaign) private controller!: ICampaignController;
   constructor() {
     this.router = express.Router();
     this.configureRoute();

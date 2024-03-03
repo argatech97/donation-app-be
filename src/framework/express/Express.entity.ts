@@ -2,12 +2,12 @@ import express, { Application, Request, Response } from "express";
 import { inject, injectable } from "inversify";
 
 import { IWebServer } from "@module/server";
-import { RoutesIdentifier } from "./routes";
-import { IRoutes } from "./common";
+import { routesIdentifier } from "./routes";
+import { IRoute } from "./common";
 
 @injectable()
 export class Express implements IWebServer {
-  @inject(new RoutesIdentifier().routes) private routes!: IRoutes[];
+  @inject(routesIdentifier.routes) private routes!: IRoute[];
   private app: Application;
 
   constructor() {
