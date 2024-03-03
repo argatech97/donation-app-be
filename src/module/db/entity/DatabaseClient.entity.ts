@@ -14,6 +14,7 @@ export interface IGetOptions {
   tableName: string;
   pagination: IPagination;
   filter?: IFilter[];
+  offsetByRecordId?: string;
 }
 
 export interface IGetByIdOptions {

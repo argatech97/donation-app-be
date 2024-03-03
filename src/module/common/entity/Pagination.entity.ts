@@ -1,8 +1,9 @@
 export interface IPagination {
   page: number;
   limit: number;
+  isNext?: boolean;
   isDesc?: boolean;
-  sortBy?: string;
+  orderBy?: string;
   rowsNumber?: number;
 }
 
@@ -13,6 +14,6 @@ export class Pagination implements IPagination {
   page!: number;
   limit!: number;
   isDesc?: boolean | undefined;
-  sortBy?: string | undefined;
+  orderBy?: string | undefined;
   rowsNumber?: number | undefined;
 }

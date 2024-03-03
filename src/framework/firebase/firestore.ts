@@ -13,6 +13,7 @@ import {
   orderBy,
   limit,
   where,
+  getCountFromServer,
 } from "firebase/firestore";
 import { inject, injectable } from "inversify";
 import { firebaseIdentifier } from "./Identifier";
@@ -47,15 +48,22 @@ export class FirestoreClient implements IDatabaseClient {
       const ref = collection(this.firestore, options.tableName);
       let q = query(ref);
       if (options.pagination) {
-        const { limit, page, sortBy, isDesc } = options.pagination;
-        q = query(q, limit())
+        const { limit: l, orderBy: ob, isDesc } = options.pagination;
+        q = query(q, limit(l));
+        if (ob) {
+          q = query(q, orderBy(ob, isDesc ? "desc" : "asc"));
+        }
       }
-      const snapshot = await getDocs();
+      const snapshot = await getDocs(q);
+      const snapshotCount = await getCountFromServer(q);
       const documents: T[] = [];
       snapshot.forEach((doc) => {
         documents.push(doc.data() as T);
       });
-      return { data: documents, pagination: options.pagination }; // Respon dari operasi get
+      return {
+        data: documents,
+        pagination: { ...options.pagination, rowsNumber: snapshotCount.data().count },
+      }; // Respon dari operasi get
     } catch (error) {
       throw new Error(`Error getting documents: ${error}`);
     }
