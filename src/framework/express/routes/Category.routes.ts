@@ -4,7 +4,7 @@ import { ICategoryController, controllerIdentifier } from "../controller";
 import { IRoute } from "../common";
 
 @injectable()
-export class CategoryRoutes implements IRoute {
+export class CategoryRoute implements IRoute {
   private router: Router;
   @inject(controllerIdentifier.category) private controller!: ICategoryController;
   constructor() {

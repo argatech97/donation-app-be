@@ -15,15 +15,12 @@ import {
   CampaignService,
 } from "@module/campaign";
 
-export const campaign = () => {
-  const container = new ContainerModule((bind) => {
-    bind<ICampaignRepository>(campaignIdentifier.repo).to(CampaignService);
-    bind<IAppErrorResponseHanlder>(commonIdentifier.appErrorResponseHandler).to(
-      AppErrorResponseHanlder,
-    );
-    bind<ICampaignUsecase>(campaignIdentifier.usecase).to(CampaignUsecase);
-    bind<ICampaignController>(controllerIdentifier.campaign).to(CampaignController);
-    bind<IRoute>(routesIdentifier.campaign).to(CampaignRoute);
-  });
-  return container;
-};
+export const campaign = new ContainerModule((bind) => {
+  bind<ICampaignRepository>(campaignIdentifier.repo).to(CampaignService);
+  bind<IAppErrorResponseHanlder>(commonIdentifier.appErrorResponseHandler).to(
+    AppErrorResponseHanlder,
+  );
+  bind<ICampaignUsecase>(campaignIdentifier.usecase).to(CampaignUsecase);
+  bind<ICampaignController>(controllerIdentifier.campaign).to(CampaignController);
+  bind<IRoute>(routesIdentifier.campaign).to(CampaignRoute);
+});
