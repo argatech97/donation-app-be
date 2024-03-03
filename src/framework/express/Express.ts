@@ -1,5 +1,6 @@
 import express, { Application, Request, Response } from "express";
 import { inject, injectable } from "inversify";
+import "reflect-metadata";
 
 import { IWebServer } from "@module/server";
 import { routesIdentifier } from "./routes";

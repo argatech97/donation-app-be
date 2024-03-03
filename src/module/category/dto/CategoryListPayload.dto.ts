@@ -14,11 +14,11 @@ export class CategoryListPayload extends PayloadRequestDto<IPagination> {
   convertToEntity = async () => {
     try {
       this.checkProperty(["page", "limit"]);
-      const { page, limit, sortBy, isDesc } = this.data;
+      const { page, limit, orderBy, isDesc } = this.data;
       return new Pagination({
         page,
         limit,
-        sortBy,
+        orderBy,
         isDesc,
       });
     } catch (error) {
