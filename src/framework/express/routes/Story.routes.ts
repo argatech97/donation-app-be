@@ -20,6 +20,6 @@ export class StoryRoute implements IRoute {
   };
 
   getRoute = () => {
-    return { router: this.router, prefix: "story" };
+    return { router: this.router, prefix: "/story" };
   };
 }

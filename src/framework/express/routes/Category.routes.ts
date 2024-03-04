@@ -19,6 +19,6 @@ export class CategoryRoute implements IRoute {
   };
 
   getRoute = () => {
-    return { router: this.router, prefix: "category" };
+    return { router: this.router, prefix: "/category" };
   };
 }

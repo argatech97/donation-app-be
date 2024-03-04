@@ -18,6 +18,6 @@ export class CampaignRoute implements IRoute {
     this.router.get("/list", this.controller.get);
   };
   getRoute = () => {
-    return { router: this.router, prefix: "campaign" };
+    return { router: this.router, prefix: "/campaign" };
   };
 }
