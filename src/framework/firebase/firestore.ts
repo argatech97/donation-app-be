@@ -7,7 +7,7 @@ import {
   IGetByIdOptions,
   IGetOptions,
 } from "@module/db";
-import { FirebaseApp, FirebaseOptions, initializeApp } from "firebase/app";
+import { FirebaseApp, initializeApp } from "firebase/app";
 import {
   Firestore,
   getFirestore,
@@ -24,17 +24,16 @@ import {
   startAfter,
   endBefore,
 } from "firebase/firestore";
-import { inject, injectable } from "inversify";
-import { firebaseIdentifier } from "./Identifier";
+import { injectable } from "inversify";
+import { firebaseConfig } from "@framework/firebase";
 
 @injectable()
 export class FirestoreClient implements IDatabaseClient {
-  @inject(firebaseIdentifier.config) private config!: FirebaseOptions;
   private app!: FirebaseApp;
   private firestore!: Firestore;
 
   constructor() {
-    this.app = initializeApp(this.config);
+    this.app = initializeApp(firebaseConfig);
     this.firestore = getFirestore(this.app);
   }
 

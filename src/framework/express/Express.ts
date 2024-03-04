@@ -1,6 +1,5 @@
 import express, { Application, Request, Response } from "express";
 import { inject, injectable } from "inversify";
-import "reflect-metadata";
 
 import { IWebServer } from "@module/server";
 import { routesIdentifier } from "./routes";
@@ -8,11 +7,14 @@ import { IRoute } from "./common";
 
 @injectable()
 export class Express implements IWebServer {
-  @inject(routesIdentifier.routes) private routes!: IRoute[];
+  private routes: IRoute[];
   private app: Application;
 
-  constructor() {
+  constructor(@inject(routesIdentifier.routes) routes: IRoute[]) {
+    this.routes = routes;
     this.app = express();
+    this.loadConfig();
+    this.loadRoutes();
   }
 
   start = (port: number) => {
@@ -24,15 +26,15 @@ export class Express implements IWebServer {
   loadConfig = () => {
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: true }));
-    this.routes.forEach((el) => {
-      const { prefix, router } = el.getRoute();
-      this.app.use(prefix, router);
-    });
   };
 
   loadRoutes = () => {
     this.app.get("/", (req: Request, res: Response) => {
-      res.send("Hello, server is working");
+      res.send("Server is working");
+    });
+    this.routes.forEach((el) => {
+      const { prefix, router } = el.getRoute();
+      this.app.use(prefix, router);
     });
   };
 }

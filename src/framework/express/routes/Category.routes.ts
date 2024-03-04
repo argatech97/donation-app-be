@@ -6,9 +6,10 @@ import { IRoute } from "../common";
 @injectable()
 export class CategoryRoute implements IRoute {
   private router: Router;
-  @inject(controllerIdentifier.category) private controller!: ICategoryController;
-  constructor() {
+  private controller: ICategoryController;
+  constructor(@inject(controllerIdentifier.category) controller: ICategoryController) {
     this.router = express.Router();
+    this.controller = controller;
     this.configureRoute();
   }
 

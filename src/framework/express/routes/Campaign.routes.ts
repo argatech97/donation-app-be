@@ -7,9 +7,10 @@ import { ICampaignController } from "../controller/Campaign.controller";
 @injectable()
 export class CampaignRoute implements IRoute {
   private router!: Router;
-  @inject(controllerIdentifier.campaign) private controller!: ICampaignController;
-  constructor() {
+  private controller: ICampaignController;
+  constructor(@inject(controllerIdentifier.campaign) controller: ICampaignController) {
     this.router = express.Router();
+    this.controller = controller;
     this.configureRoute();
   }
   configureRoute = () => {

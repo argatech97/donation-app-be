@@ -4,7 +4,7 @@ import { ICategoryUsecase } from "@module/category/usecase";
 import { IAppError } from "@module/common";
 import { Request, Response } from "express";
 import { inject, injectable } from "inversify";
-import { CommonIdentifier, IAppErrorResponseHanlder } from "../common";
+import { IAppErrorResponseHanlder, commonIdentifier } from "../common";
 
 export interface ICategoryController {
   create: (req: Request, res: Response) => Promise<void>;
@@ -13,7 +13,7 @@ export interface ICategoryController {
 
 @injectable()
 export class CategoryController implements ICategoryController {
-  @inject(new CommonIdentifier().appErrorResponseHandler)
+  @inject(commonIdentifier.appErrorResponseHandler)
   private errorHandler!: IAppErrorResponseHanlder;
   @inject(new CategoryIdentifier().usecase) private uc!: ICategoryUsecase;
   create = async (req: Request, res: Response) => {

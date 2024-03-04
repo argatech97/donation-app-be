@@ -5,11 +5,12 @@ import { IStoryController, controllerIdentifier } from "../controller";
 
 @injectable()
 export class StoryRoute implements IRoute {
-  @inject(controllerIdentifier.story) private controller!: IStoryController;
+  private controller!: IStoryController;
   private router!: Router;
 
-  constructor() {
+  constructor(@inject(controllerIdentifier.story) controller: IStoryController) {
     this.router = express.Router();
+    this.controller = controller;
     this.configureRoute();
   }
 
