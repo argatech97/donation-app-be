@@ -17,7 +17,7 @@ export class StoryController implements IStoryController {
 
   create = async (req: Request, res: Response) => {
     try {
-      const payload = await new StoryPayloadDto(req.params).convertToEntity();
+      const payload = await new StoryPayloadDto(req.body).convertToEntity();
       const response = await this.uc.create(payload);
       res.status(201).send(response);
     } catch (error) {

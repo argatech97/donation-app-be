@@ -18,7 +18,7 @@ export class CategoryController implements ICategoryController {
   @inject(new CategoryIdentifier().usecase) private uc!: ICategoryUsecase;
   create = async (req: Request, res: Response) => {
     try {
-      const payload = await new CategoryPayloadDto(req.params).convertToEntity();
+      const payload = await new CategoryPayloadDto(req.body).convertToEntity();
       await this.uc.create(payload);
       res.status(201);
     } catch (error) {

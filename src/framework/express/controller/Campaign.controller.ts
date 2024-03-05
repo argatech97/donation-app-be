@@ -18,7 +18,7 @@ export class CampaignController implements ICampaignController {
 
   create = async (req: Request, res: Response) => {
     try {
-      const payload = await new CampaignPayloadDto(req.params).convertToEntity();
+      const payload = await new CampaignPayloadDto(req.body).convertToEntity();
       const response = await this.campaignUC.create(payload);
       res.status(201).send(response);
     } catch (error) {
