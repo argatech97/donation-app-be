@@ -3,7 +3,7 @@ import { IBasicDBClient, IData } from "@module/db";
 import { firestore } from "firebase-admin";
 import { inject, injectable } from "inversify";
 import { types } from "./Types";
-import { GatewayTimeout } from "@module/common";
+import { GatewayTimeout, InternalServerError } from "@module/common";
 import { FirebaseFirestoreError } from "firebase-admin/lib/utils/error";
 
 @injectable()
@@ -18,7 +18,10 @@ export class BasicFirebase implements IBasicDBClient {
 
   errorGateway(error: unknown) {
     const x = error as FirebaseFirestoreError;
-    throw new GatewayTimeout([x.message]);
+    if (x.code) {
+      throw new GatewayTimeout([x.message]);
+    }
+    throw new InternalServerError([x.message]);
   }
 
   create = async (data: IData[], target: string) => {

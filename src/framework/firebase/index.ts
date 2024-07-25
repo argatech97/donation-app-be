@@ -1,2 +1,2 @@
-export * from "./BasicFirebase.implementation";
+export * from "./BasicFirebase";
 export * from "./Firebase.container";
