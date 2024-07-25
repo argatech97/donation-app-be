@@ -1,6 +1,13 @@
+export type Value = string | boolean | number | string[] | number[];
+
 export interface IData {
   columnName: string;
-  value: string | boolean | number | string[] | number[];
+  value: Value;
+}
+
+export interface IDataArrValue {
+  columnName: string;
+  value: Value[];
 }
 
 export class Data implements IData {
