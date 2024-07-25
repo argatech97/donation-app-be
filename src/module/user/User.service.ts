@@ -3,7 +3,7 @@ import { IUserRepository } from "./User.repository";
 import { IUserReqPayloadDto } from "./dto";
 import { inject, injectable } from "inversify";
 @injectable()
-export class UserRepoImpl implements IUserRepository {
+export class UserService implements IUserRepository {
   @inject(types().basicDBClient) private dbClient!: IBasicDBClient;
 
   private target = "user";

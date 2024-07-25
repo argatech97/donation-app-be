@@ -15,13 +15,12 @@ export class CreatePayloadUC<T> implements ICreatePayloadUC<T> {
   @inject(types().basicValidator) private validator!: IValidator;
   execute = async (data: PayloadReqClient, ruleProp: IRuleProperty<T>) => {
     const x = await Promise.all(
-      Object.keys(data).map((el) =>
+      Object.keys(ruleProp).map((el) =>
         this.validator.execute(el, data[el], ruleProp[el as keyof IRuleProperty<T>]),
       ),
     ).catch((err) => {
       throw err;
     });
-
     const reqPayload = x.reduce((acc, el) => {
       if (el.isValid && Object.keys(data).indexOf(el.property) !== -1) {
         return { ...acc, [el.property]: data[el.property as keyof T] };

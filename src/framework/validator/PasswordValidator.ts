@@ -8,19 +8,19 @@ export class PasswordValidatorV1 implements IPasswordValidator {
     const errors = [];
 
     if (!validator.isLength(password, { min: 8 })) {
-      errors.push("Password must be at least 8 characters long.");
+      errors.push("Password must be at least 8 characters long");
     }
     if (!/[A-Z]/.test(password)) {
-      errors.push("Password must contain at least one uppercase letter.");
+      errors.push("Password must contain at least one uppercase letter");
     }
     if (!/[a-z]/.test(password)) {
-      errors.push("Password must contain at least one lowercase letter.");
+      errors.push("Password must contain at least one lowercase letter");
     }
     if (!/[0-9]/.test(password)) {
-      errors.push("Password must contain at least one number.");
+      errors.push("Password must contain at least one number");
     }
     if (!/[^A-Za-z0-9]/.test(password)) {
-      errors.push("Password must contain at least one special character.");
+      errors.push("Password must contain at least one special character");
     }
 
     return new Valid({

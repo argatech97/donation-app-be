@@ -6,6 +6,7 @@ import validator from "validator";
 @injectable()
 export class BasicValidator implements IValidator {
   violateRuleMessage(rule: Rule) {
+    console.log(rule);
     if (rule !== "required") {
       return `value is not ${rule}`;
     }
@@ -29,7 +30,7 @@ export class BasicValidator implements IValidator {
         } else if (el === "required") {
           return new ValidationRule({
             rule: el,
-            isValid: !validator.isEmpty(`${data}`),
+            isValid: data !== undefined && !validator.isEmpty(`${data}`),
           });
         } else if (el === "email") {
           return new ValidationRule({
@@ -48,7 +49,7 @@ export class BasicValidator implements IValidator {
           isValid: true,
         });
       });
-
+      console.log(x);
       return new Valid({
         isValid: !x.some((el) => el.isValid === false),
         property,
