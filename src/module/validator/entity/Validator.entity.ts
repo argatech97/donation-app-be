@@ -32,3 +32,7 @@ export class ValidationRule implements IValidationRule {
 export interface IValidator {
   execute: (property: string, data: Value, rule: Rule[]) => Promise<isValid>;
 }
+
+export interface IPasswordValidator {
+  execute: (value: string) => Promise<isValid>;
+}
